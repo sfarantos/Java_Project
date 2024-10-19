@@ -11,13 +11,18 @@ public class Customer {
     private Nationality nationality;
     private Category category;
 
-    public Customer(Long id, String name, String email, String address, Nationality nationality, Category category) {
+    public Customer(Long id, String name, String email, String address, Nationality nationality, Category category) throws WrongEmailException {
         this.id = id;
         this.name = name;
-        this.email = email;
+        if (validEmail(email)){
+            this.email = email;
+        } else {
+            throw new WrongEmailException();
+        }
         this.address = address;
         this.nationality = nationality;
         this.category = category;
+
     }
 
 
@@ -41,8 +46,12 @@ public class Customer {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String email) throws WrongEmailException {
+        if (validEmail(email)){
+            this.email = email;
+        } else {
+            throw new WrongEmailException();
+        }
     }
 
     public String getAddress() {
@@ -71,7 +80,12 @@ public class Customer {
 
 
 
-
+    public boolean validEmail (String email){
+        if (email.endsWith("@travelcompany.com")){
+            return false;
+        }
+        return true;
+    }
 
 
 
