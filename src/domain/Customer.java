@@ -15,7 +15,7 @@ public class Customer {
     public Customer(Long id, String name, String email, String address, Nationality nationality, Category category) throws WrongEmailException {
         this.id = id;
         this.name = name;
-        if (validEmail(email)){
+        if (validEmail(email)) {
             this.email = email;
         } else {
             throw new WrongEmailException("fails");
@@ -48,7 +48,7 @@ public class Customer {
     }
 
     public void setEmail(String email) throws WrongEmailException {
-        if (validEmail(email)){
+        if (validEmail(email)) {
             this.email = email;
         } else {
             throw new WrongEmailException("fails");
@@ -80,16 +80,29 @@ public class Customer {
     }
 
 
-
-    public boolean validEmail (String email){
-        if (email.endsWith("@travelcompany.com")){
+    public boolean validEmail(String email) {
+        if (email.endsWith("@travelcompany.com")) {
             return false;
         }
         return true;
     }
 
 
-
+//    public void double getDiscount(){
+//
+//    }
+//
+//    public BusinessCustomer {
+//        public double getDiscount () {
+//            return 0.10;
+//        }
+//    }
+//
+//    public IndividualCustomer  {
+//        public double getDiscount () {
+//            return -0.20;
+//        }
+//    }
 
 
 }
