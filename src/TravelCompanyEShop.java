@@ -1,7 +1,7 @@
 
 
 import domain.Customer;
-import domain.WrongEmailException;
+import exceptions.WrongEmailException;
 import enumeration.Category;
 import enumeration.Nationality;
 
@@ -14,7 +14,7 @@ public class TravelCompanyEShop {
         System.out.println(nationality);
         try {
             Customer businessCustomer = new Customer(id++ , "Dionysis", "d.petrotos@codehub.gr", "Stadiou 2", Nationality.GREEK, Category.BUSINESS);
-            Customer businessCustomer2 = new Customer(id++ , "Dionysis", "d.petrotos@travelcompany.com", "Stadiou 2", Nationality.GREEK, Category.BUSINESS);
+            //Customer businessCustomer2 = new Customer(id++ , "Dionysis", "d.petrotos@travelcompany.com", "Stadiou 2", Nationality.GREEK, Category.BUSINESS);
         } catch (WrongEmailException e) {
             e.printStackTrace();
         }

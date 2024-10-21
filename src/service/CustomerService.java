@@ -1,7 +1,7 @@
 package service;
 
 import domain.Customer;
-import domain.NoCustomerIdException;
+import exceptions.NoCustomerIdException;
 
 import java.util.ArrayList;
 
@@ -23,6 +23,7 @@ public class CustomerService {
     }
 
     public void deleteCustomer(long customerid) throws NoCustomerIdException {
+        //customerList.remove(customer);
         for (int i =0; i < customerList.size(); i++){
             if (customerList.get(i).getId()==customerid){
                 customerList.remove(i);

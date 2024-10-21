@@ -2,6 +2,7 @@ package domain;
 
 import enumeration.Category;
 import enumeration.Nationality;
+import exceptions.WrongEmailException;
 
 public class Customer {
     private Long id;
@@ -17,7 +18,7 @@ public class Customer {
         if (validEmail(email)){
             this.email = email;
         } else {
-            throw new WrongEmailException();
+            throw new WrongEmailException("fails");
         }
         this.address = address;
         this.nationality = nationality;
@@ -50,7 +51,7 @@ public class Customer {
         if (validEmail(email)){
             this.email = email;
         } else {
-            throw new WrongEmailException();
+            throw new WrongEmailException("fails");
         }
     }
 
