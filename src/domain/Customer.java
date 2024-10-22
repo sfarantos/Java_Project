@@ -12,7 +12,7 @@ public class Customer {
     private Nationality nationality;
     private Category category;
 
-    public Customer(Long id, String name, String email, String address, Nationality nationality, Category category) throws InvalidEmailException {
+    public Customer( Long id, String name, String email, String address, Nationality nationality, Category category) throws InvalidEmailException {
         this.id = id;
         this.name = name;
         if (validEmail(email)) {
@@ -81,28 +81,14 @@ public class Customer {
 
 
     public boolean validEmail(String email) {
-        if (email.endsWith("@travelcompany.com")) {
-            return false;
-        }
-        return true;
+//        if (email.endsWith("@travelcompany.com")) {
+//            return false;
+//        }
+//        return true;
+        return !email.endsWith("@travelcompany.com");
     }
 
 
-//    public void double getDiscount(){
-//
-//    }
-//
-//    public BusinessCustomer {
-//        public double getDiscount () {
-//            return 0.10;
-//        }
-//    }
-//
-//    public IndividualCustomer  {
-//        public double getDiscount () {
-//            return -0.20;
-//        }
-//    }
 
 
 }

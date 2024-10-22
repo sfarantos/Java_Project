@@ -18,6 +18,7 @@ public class Itinerary {
         this.destinationCode = destinationCode;
     }
 
+
     public Date getDepartureDate() {
         return departureDate;
     }

@@ -4,23 +4,29 @@ import domain.Customer;
 import exceptions.CustomerNotFoundException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerService {
 
-    private ArrayList<Customer> customerList;
+    private List<Customer> customerList = new ArrayList<>();
 
-    public CustomerService(ArrayList customerList) {
-        this.customerList = customerList;
+//    public CustomerService(List<Customer> customerList) {
+//        this.customerList = customerList;
+//    }
+
+    public CustomerService() {
+
     }
 
 
-    public ArrayList getCustomerList() {
+    public List<Customer> getCustomerList() {
         return customerList;
     }
 
-    public void setCustomerList(ArrayList customerList) {
+    public void setCustomerList(List<Customer> customerList) {
         this.customerList = customerList;
     }
+
 
     public void deleteCustomer(long customerid) throws CustomerNotFoundException {
         //customerList.remove(customer);
@@ -30,23 +36,54 @@ public class CustomerService {
                 return;
             }
         }
-        throw new CustomerNotFoundException(customerid);
+        throw new CustomerNotFoundException("Customer id : " + customerid );
     }
 
 
-    public Customer searchCustomer(long customerid) throws CustomerNotFoundException {
+//    public Customer searchCustomer(long customerid) throws CustomerNotFoundException {
+//        for (Customer customer: customerList){
+//            if (customer.getId()==customerid){
+//                return customer;
+//            }
+//        }
+//        throw new CustomerNotFoundException(customerid);
+//
+//    }
+
+
+
+    public Customer searchCustomer(String email) throws CustomerNotFoundException {
         for (Customer customer: customerList){
-            if (customer.getId()==customerid){
+            if (customer.getEmail().equals(email)){
                 return customer;
             }
         }
-        throw new CustomerNotFoundException(customerid);
+        throw new CustomerNotFoundException("Customer with email : " + email + " not found");
 
     }
+
+
+
+
 
     public void addCustomer(Customer customer) {
         customerList.add(customer);
         }
+
+
+    public void showAllCustomers() {
+        if (customerList.isEmpty()) {
+            System.out.println("No customers found.");
+        } else {
+            System.out.println("Customer list:");
+            customerList.forEach(customer -> System.out.println(customer.getName() + " - " + customer.getEmail()));
+        }
+    }
+
+
+
+
+
 
 
 

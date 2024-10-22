@@ -5,9 +5,20 @@ import domain.Itinerary;
 import domain.Ticket;
 import enumeration.Category;
 import enumeration.PaymentMethod;
+import exceptions.CustomerNotFoundException;
 
 public class TicketService {
-    public Ticket purchaseTicket(Customer customer, Itinerary itinerary, PaymentMethod paymentMethod) {
+
+
+    private CustomerService customerService;
+
+    public TicketService(CustomerService customerService){
+        this.customerService = customerService;
+    }
+
+
+    public Ticket purchaseTicket(String customerEmail, Itinerary itinerary, PaymentMethod paymentMethod) throws CustomerNotFoundException {
+        Customer customer = customerService.searchCustomer(customerEmail);
         double finalPrice = calculateFinalPrice(customer, itinerary.getPrice(), paymentMethod);
         return new Ticket(customer, itinerary, finalPrice);
     }
