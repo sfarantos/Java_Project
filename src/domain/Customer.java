@@ -2,7 +2,7 @@ package domain;
 
 import enumeration.Category;
 import enumeration.Nationality;
-import exceptions.WrongEmailException;
+import exceptions.InvalidEmailException;
 
 public class Customer {
     private Long id;
@@ -12,13 +12,13 @@ public class Customer {
     private Nationality nationality;
     private Category category;
 
-    public Customer(Long id, String name, String email, String address, Nationality nationality, Category category) throws WrongEmailException {
+    public Customer(Long id, String name, String email, String address, Nationality nationality, Category category) throws InvalidEmailException {
         this.id = id;
         this.name = name;
         if (validEmail(email)) {
             this.email = email;
         } else {
-            throw new WrongEmailException("fails");
+            throw new InvalidEmailException("fails");
         }
         this.address = address;
         this.nationality = nationality;
@@ -47,11 +47,11 @@ public class Customer {
         return email;
     }
 
-    public void setEmail(String email) throws WrongEmailException {
+    public void setEmail(String email) throws InvalidEmailException {
         if (validEmail(email)) {
             this.email = email;
         } else {
-            throw new WrongEmailException("fails");
+            throw new InvalidEmailException("fails");
         }
     }
 

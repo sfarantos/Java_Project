@@ -1,7 +1,7 @@
 
 
 import domain.Customer;
-import exceptions.WrongEmailException;
+import exceptions.InvalidEmailException;
 import enumeration.Category;
 import enumeration.Nationality;
 
@@ -15,7 +15,7 @@ public class TravelCompanyEShop {
         try {
             Customer businessCustomer = new Customer(id++ , "Dionysis", "d.petrotos@codehub.gr", "Stadiou 2", Nationality.GREEK, Category.BUSINESS);
             //Customer businessCustomer2 = new Customer(id++ , "Dionysis", "d.petrotos@travelcompany.com", "Stadiou 2", Nationality.GREEK, Category.BUSINESS);
-        } catch (WrongEmailException e) {
+        } catch (InvalidEmailException e) {
             e.printStackTrace();
         }
 

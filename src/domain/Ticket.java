@@ -4,25 +4,18 @@ import enumeration.PaymentMethod;
 
 public class Ticket {
 
-    private PaymentMethod paymentMethod;
-    private Itinerary itinerary;
-    private Customer customer;
-    private double paymentAmount;
 
-    public Ticket(String paymentMethod, Itinerary itinerary, Customer customer, double paymentAmount) {
-        this.paymentMethod = PaymentMethod.valueOf(paymentMethod);
+    private Customer customer;
+    private Itinerary itinerary;
+
+    private double finalPrice;
+
+    public Ticket( Customer customer, Itinerary itinerary, double paymentAmount) {
         this.itinerary = itinerary;
         this.customer = customer;
-        this.paymentAmount = paymentAmount;
+        this.finalPrice = paymentAmount;
     }
 
-    public PaymentMethod getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
 
     public Itinerary getItinerary() {
         return itinerary;
@@ -40,12 +33,12 @@ public class Ticket {
         this.customer = customer;
     }
 
-    public double getPaymentAmount() {
-        return paymentAmount;
+    public double getFinalPrice() {
+        return finalPrice;
     }
 
-    public void setPaymentAmount(double paymentAmount) {
-        this.paymentAmount = paymentAmount;
+    public void setFinalPrice(double finalPrice) {
+        this.finalPrice = finalPrice;
     }
 
 

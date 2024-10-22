@@ -1,7 +1,7 @@
 package service;
 
 import domain.Customer;
-import exceptions.NoCustomerIdException;
+import exceptions.CustomerNotFoundException;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class CustomerService {
         this.customerList = customerList;
     }
 
-    public void deleteCustomer(long customerid) throws NoCustomerIdException {
+    public void deleteCustomer(long customerid) throws CustomerNotFoundException {
         //customerList.remove(customer);
         for (int i =0; i < customerList.size(); i++){
             if (customerList.get(i).getId()==customerid){
@@ -30,17 +30,17 @@ public class CustomerService {
                 return;
             }
         }
-        throw new NoCustomerIdException(customerid);
+        throw new CustomerNotFoundException(customerid);
     }
 
 
-    public Customer searchCustomer(long customerid) throws NoCustomerIdException {
+    public Customer searchCustomer(long customerid) throws CustomerNotFoundException {
         for (Customer customer: customerList){
             if (customer.getId()==customerid){
                 return customer;
             }
         }
-        throw new NoCustomerIdException(customerid);
+        throw new CustomerNotFoundException(customerid);
 
     }
 
