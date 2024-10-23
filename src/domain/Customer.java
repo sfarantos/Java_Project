@@ -5,20 +5,20 @@ import enumeration.Nationality;
 import exceptions.InvalidEmailException;
 
 public class Customer {
-    private Long id;
+    private long id;
     private String name;
     private String email;
     private String address;
     private Nationality nationality;
     private Category category;
 
-    public Customer( Long id, String name, String email, String address, Nationality nationality, Category category) throws InvalidEmailException {
+    public Customer( long id, String name, String email, String address, Nationality nationality, Category category) throws InvalidEmailException {
         this.id = id;
         this.name = name;
         if (validEmail(email)) {
             this.email = email;
         } else {
-            throw new InvalidEmailException("fails");
+            throw new InvalidEmailException("fails email can not be @travelcompany.com ");
         }
         this.address = address;
         this.nationality = nationality;
@@ -27,11 +27,11 @@ public class Customer {
     }
 
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -51,7 +51,7 @@ public class Customer {
         if (validEmail(email)) {
             this.email = email;
         } else {
-            throw new InvalidEmailException("fails");
+            throw new InvalidEmailException("fails : the email can not be @travelcompany.com ");
         }
     }
 

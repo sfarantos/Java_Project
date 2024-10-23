@@ -9,7 +9,7 @@ import exceptions.InvalidEmailException;
 import enumeration.Category;
 import enumeration.Nationality;
 import service.CustomerService;
-import service.ReportService;
+//import service.ReportService;
 import service.TicketService;
 
 import java.text.ParseException;
@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TravelCompanyEShop {
+
+
 
 
 //    public static void main(String[] args) {
@@ -38,105 +40,6 @@ public class TravelCompanyEShop {
 
 
 
-//        public static void main(String[] args) {
-//
-//            long id = 0;
-//
-//            CustomerService customerService = new CustomerService();
-//            TicketService ticketService = new TicketService(customerService);
-//
-//            Scanner scanner = new Scanner(System.in);
-//
-//            while (true) {
-//                System.out.println("\n=== Travel Company Menu ===");
-//                System.out.println("1. Add new customer");
-//                System.out.println("2. Search customer by email");
-//                System.out.println("3. Purchase ticket");
-//                System.out.println("4. Exit");
-//                System.out.print("Choose an option: ");
-//
-//                int choice = scanner.nextInt();
-//                scanner.nextLine();
-//
-//                switch (choice) {
-//                    case 1:
-//                        System.out.print("Enter customer name: ");
-//                        String name = scanner.nextLine();
-//                        System.out.print("Enter customer email: ");
-//                        String email = scanner.nextLine();
-//                        System.out.print("Enter customer address: ");
-//                        String address = scanner.nextLine();
-//                        System.out.print("Enter customer nationality (1 for GREEK , 2 for ITALIAN , 3 for USA): ");
-//                        int nationalityChoice = scanner.nextInt();
-//                        Nationality nationality = switch (nationalityChoice){
-//                            case 1 -> Nationality.GREEK;
-//                            case 2 -> Nationality.ITALIAN;
-//                            case 3 -> Nationality.USA;
-//                            default -> throw new IllegalArgumentException("Invalid nationality");
-//                        };
-//
-//
-//                        System.out.print("Enter customer type (1 for BUSINESS, 2 for INDIVIDUAL): ");
-//                        int categoryChoice = scanner.nextInt();
-//                        Category category = (categoryChoice == 1) ? Category.BUSINESS : Category.INDIVIDUAL;
-//
-//                        try {
-//                            Customer newCustomer = new Customer(id++ , name , email , address , nationality , category);
-//                            customerService.addCustomer(newCustomer);
-//                            System.out.println("Customer added successfully");
-//                        } catch (InvalidEmailException e){
-//                            System.out.println("Invalid email format: " + e.getMessage());
-//                        }
-//                        break;
-//
-//                    case 2:
-//                        System.out.print("Enter customer email: ");
-//                        String searchEmail = scanner.nextLine();
-//                        try {
-//                            Customer foundCustomer = customerService.searchCustomer(searchEmail);
-//                            System.out.println("Customer found: " + foundCustomer.getName() + " (" + foundCustomer.getCategory() + ")");
-//                        } catch (CustomerNotFoundException e) {
-//                            System.out.println(e.getMessage());
-//                        }
-//                        break;
-//
-//                    case 3:
-//                        System.out.print("Enter customer email: ");
-//                        String customerEmail = scanner.nextLine();
-//                        System.out.print("Enter itinerary departure (e.g., ATH): ");
-//                        String departure = scanner.nextLine();
-//                        System.out.print("Enter itinerary destination (e.g., JFK): ");
-//                        String destination = scanner.nextLine();
-//                        System.out.print("Enter itinerary price: ");
-//                        double price = scanner.nextDouble();
-//                        scanner.nextLine();
-//                        System.out.print("Enter payment method (1 for CREDIT_CARD, 2 for CASH): ");
-//                        int paymentChoice = scanner.nextInt();
-//                        scanner.nextLine();
-//                        PaymentMethod paymentMethod = (paymentChoice == 1) ? PaymentMethod.CREDIT_CARD : PaymentMethod.CASH;
-//
-//                        Itinerary itinerary = new Itinerary(departure, destination, price);
-//
-//                        try {
-//                            Ticket ticket = ticketService.purchaseTicket(customerEmail, itinerary, paymentMethod);
-//                            System.out.println("Ticket purchased for " + ticket.getCustomer().getName() + ", Final Price: " + ticket.getFinalPrice());
-//                        } catch (CustomerNotFoundException e) {
-//                            System.out.println(e.getMessage());
-//                        }
-//                        break;
-//
-//                    case 4:
-//                        System.out.println("Exiting the application. Goodbye!");
-//                        scanner.close();
-//                        return;
-//
-//                    default:
-//                        System.out.println("Invalid option. Please try again.");
-//                }
-//            }
-//        }
-
-
 
     public static void main(String[] args) {
 
@@ -152,7 +55,9 @@ public class TravelCompanyEShop {
             System.out.println("1. Add new customer");
             System.out.println("2. Search customer by email");
             System.out.println("3. Purchase ticket");
-            System.out.println("4. Exit");
+            System.out.println("4. Delete customer by email");
+            System.out.println("5. Show all customers");
+            System.out.println("6. Exit");
             System.out.print("Choose an option: ");
 
             int choice = scanner.nextInt();
@@ -162,8 +67,7 @@ public class TravelCompanyEShop {
                 case 1:
                     System.out.print("Enter customer name: ");
                     String name = scanner.nextLine();
-                    System.out.print("Enter customer email: ");
-                    String email = scanner.nextLine();
+                    String email = customerService.forValidEmail(scanner);
                     System.out.print("Enter customer address: ");
                     String address = scanner.nextLine();
                     System.out.print("Enter customer nationality (1 for GREEK , 2 for ITALIAN , 3 for USA): ");
@@ -190,8 +94,7 @@ public class TravelCompanyEShop {
                     break;
 
                 case 2:
-                    System.out.print("Enter customer email: ");
-                    String searchEmail = scanner.nextLine();
+                    String searchEmail = customerService.forValidEmail(scanner);
                     try {
                         Customer foundCustomer = customerService.searchCustomer(searchEmail);
                         System.out.println("Customer found: " + foundCustomer.getName() + " (" + foundCustomer.getCategory() + ")");
@@ -201,8 +104,7 @@ public class TravelCompanyEShop {
                     break;
 
                 case 3:
-                    System.out.print("Enter customer email: ");
-                    String customerEmail = scanner.nextLine();
+                    String customerEmail = customerService.forValidEmail(scanner);
                     System.out.print("Enter itinerary price: ");
                     double price = scanner.nextDouble();
                     scanner.nextLine();
@@ -221,9 +123,9 @@ public class TravelCompanyEShop {
 
                     System.out.print("Enter airline name: ");
                     String airlineName = scanner.nextLine();
-                    System.out.print("Enter itinerary departure code (e.g., ATH): ");
+                    System.out.print("Enter itinerary departure code : ");
                     String departureCode = scanner.nextLine();
-                    System.out.print("Enter itinerary destination code (e.g., JFK): ");
+                    System.out.print("Enter itinerary destination code : ");
                     String destinationCode = scanner.nextLine();
 
                     Itinerary itinerary = new Itinerary(departureDate, airlineName, price, departureCode, destinationCode);
@@ -251,8 +153,23 @@ public class TravelCompanyEShop {
                     }
                     break;
 
-
                 case 4:
+                    String deleteEmail = customerService.forValidEmail(scanner);
+                    try{
+                        customerService.deleteCustomer(deleteEmail);
+                        System.out.println("Customer delete successfully");
+                    } catch (CustomerNotFoundException e){
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+
+                case 5:
+                    customerService.showAllCustomers();
+                    break;
+
+
+
+                case 6:
                     System.out.println("Exiting the application. Goodbye!");
                     scanner.close();
                     return;

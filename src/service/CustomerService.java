@@ -5,14 +5,13 @@ import exceptions.CustomerNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class CustomerService {
 
     private List<Customer> customerList = new ArrayList<>();
 
-//    public CustomerService(List<Customer> customerList) {
-//        this.customerList = customerList;
-//    }
+
 
     public CustomerService() {
 
@@ -28,16 +27,43 @@ public class CustomerService {
     }
 
 
-    public void deleteCustomer(long customerid) throws CustomerNotFoundException {
-        //customerList.remove(customer);
-        for (int i =0; i < customerList.size(); i++){
-            if (customerList.get(i).getId()==customerid){
-                customerList.remove(i);
-                return;
-            }
-        }
-        throw new CustomerNotFoundException("Customer id : " + customerid );
+//    public void deleteCustomer(long customerid) throws CustomerNotFoundException {
+//        //customerList.remove(customer);
+//        for (int i =0; i < customerList.size(); i++){
+//            if (customerList.get(i).getId()==customerid){
+//                customerList.remove(i);
+//                return;
+//            }
+//        }
+//        throw new CustomerNotFoundException("Customer id : " + customerid );
+//    }
+
+
+
+    public void deleteCustomer(String email) throws CustomerNotFoundException {
+        Customer customerToDelete = searchCustomer(email);
+        customerList.remove(customerToDelete);
+        ressignIds();
     }
+//        for (int i =0; i < customerList.size(); i++){
+//            if (customerList.get(i).getEmail().equals(email)){
+//                customerList.remove(i);
+//                return;
+//            }
+//        }
+//        throw new CustomerNotFoundException("Customer with email : " + email + " not found" );
+//    }
+
+
+    private void ressignIds(){
+        for (int i = 0 ; i < customerList.size() ; i++){
+            customerList.get(i).setId(i + 1);
+        }
+    }
+
+
+
+
 
 
 //    public Customer searchCustomer(long customerid) throws CustomerNotFoundException {
@@ -67,6 +93,7 @@ public class CustomerService {
 
 
     public void addCustomer(Customer customer) {
+        customer.setId(customerList.size() +1);
         customerList.add(customer);
         }
 
@@ -76,12 +103,26 @@ public class CustomerService {
             System.out.println("No customers found.");
         } else {
             System.out.println("Customer list:");
-            customerList.forEach(customer -> System.out.println(customer.getName() + " - " + customer.getEmail()));
+            for (Customer customer : customerList) {
+                System.out.println("ID: " + customer.getId() + " , Name : " + customer.getName() + " , Email : " + customer.getEmail());
+            }
         }
     }
 
 
-
+    public String forValidEmail(Scanner scanner){
+        String email;
+        while (true){
+            System.out.print("Enter customer email: ");
+            email = scanner.nextLine();
+            if (email.contains("@")){
+                break;
+            } else {
+                System.out.println("Invalid email. Pleasa enter again the email ");
+            }
+        }
+        return email;
+    }
 
 
 
