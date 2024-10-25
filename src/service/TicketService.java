@@ -25,35 +25,90 @@ public class TicketService {
             new Itinerary("SAM", "IST", "03/03/2024 09:25", "Wizz", 100)
     };
 
+
+
     public TicketService(CustomerService customerService) {
         this.customerService = customerService;
     }
 
+
+
+
     public Ticket purchaseTicket(String customerEmail, PaymentMethod paymentMethod, Scanner scanner) throws CustomerNotFoundException {
         Customer customer = customerService.searchCustomer(customerEmail);
 
-        System.out.println("Available Itineraries:");
-        for (int i = 0; i < itineraries.length; i++) {
-            Itinerary itinerary = itineraries[i];
-            System.out.println((i + 1) + ". Departure: " + itinerary.getDepartureCode() +
-                    ", Destination: " + itinerary.getDestinationCode() +
-                    ", Date: " + itinerary.getDepartureDate() +
-                    ", Airline: " + itinerary.getAirlineName() +
-                    ", Price: " + itinerary.getPrice());
+        System.out.print("Do you want to see all itineraries (1) or select a departure code (2)? : ");
+        int choice = scanner.nextInt();
+
+        Itinerary selectedItinerary = null;
+        if (choice == 1) {
+            System.out.print("Available Itineraries:");
+            for (int i = 0; i < itineraries.length; i++) {
+                Itinerary itinerary = itineraries[i];
+                System.out.println((i + 1) + ". Departure: " + itinerary.getDepartureCode() +
+                        ", Destination: " + itinerary.getDestinationCode() +
+                        ", Date: " + itinerary.getDepartureDate() +
+                        ", Airline: " + itinerary.getAirlineName() +
+                        ", Price: " + itinerary.getPrice());
+            }
+            System.out.print("Select an itinerary (1-" + itineraries.length + "): ");
+            int itineraryChoice = scanner.nextInt() - 1;
+            selectedItinerary = itineraries[itineraryChoice];
+        } else if (choice == 2) {
+            System.out.print("Select departure code (1 for ATH, 2 for XAN, 3 for SAM): ");
+            int departureChoice = scanner.nextInt();
+            String departureCode = switch (departureChoice) {
+                case 1 -> "ATH";
+                case 2 -> "XAN";
+                case 3 -> "SAM";
+                default -> throw new IllegalArgumentException("Invalid choice");
+            };
+
+            String destinationCode = null;
+            if ("ATH".equals(departureCode)) {
+                System.out.print("Choose destination (1 for PAR, 2 for LON): ");
+                int destChoice = scanner.nextInt();
+                destinationCode = (destChoice == 1) ? "PAR" : "LON";
+            } else if ("XAN".equals(departureCode)) {
+                System.out.print("Choose destination (1 for NYC, 2 for PAR): ");
+                int destChoice = scanner.nextInt();
+                destinationCode = (destChoice == 1) ? "NYC" : "PAR";
+            } else if ("SAM".equals(departureCode)) {
+                System.out.print("Choose destination (1 for TOK, 2 for IST): ");
+                int destChoice = scanner.nextInt();
+                destinationCode = (destChoice == 1) ? "TOK" : "IST";
+            }
+
+            System.out.print("Choose airline (1 for Ryanair, 2 for Wizz): ");
+            int airlineChoice = scanner.nextInt();
+            String airlineName = (airlineChoice == 1) ? "Ryanair" : "Wizz";
+
+            double price = getPriceBasedOnRoute(departureCode, destinationCode);
+            selectedItinerary = new Itinerary(departureCode, destinationCode, "date", airlineName, price);
         }
 
-        System.out.print("Select an itinerary (1-" + itineraries.length + "): ");
-        int itineraryChoice = scanner.nextInt() - 1;
-        if (itineraryChoice < 0 || itineraryChoice >= itineraries.length) {
-            System.out.println("Invalid choice. Please try again.");
-            return null;
-        }
-
-        Itinerary selectedItinerary = itineraries[itineraryChoice];
         double finalPrice = calculateFinalPrice(customer, selectedItinerary.getPrice(), paymentMethod);
+        customer.addPurchase(finalPrice);
 
         return new Ticket(customer, selectedItinerary, finalPrice);
     }
+
+    private double getPriceBasedOnRoute(String departureCode, String destinationCode) {
+        if ("ATH".equals(departureCode) && "PAR".equals(destinationCode)) return 200;
+        if ("ATH".equals(departureCode) && "LON".equals(destinationCode)) return 250;
+        if ("XAN".equals(departureCode) && "NYC".equals(destinationCode)) return 500;
+        if ("XAN".equals(departureCode) && "PAR".equals(destinationCode)) return 250;
+        if ("SAM".equals(departureCode) && "TOK".equals(destinationCode)) return 800;
+        if ("SAM".equals(departureCode) && "IST".equals(destinationCode)) return 100;
+
+        return 0;
+    }
+
+
+
+
+
+
 
     private double calculateFinalPrice(Customer customer, double basePrice, PaymentMethod paymentMethod) {
         double discount = 0.0;

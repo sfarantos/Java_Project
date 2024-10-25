@@ -1,7 +1,4 @@
-
-
 import domain.Customer;
-import domain.Itinerary;
 import domain.Ticket;
 import enumeration.PaymentMethod;
 import exceptions.CustomerNotFoundException;
@@ -9,13 +6,8 @@ import exceptions.InvalidEmailException;
 import enumeration.Category;
 import enumeration.Nationality;
 import service.CustomerService;
-//import service.ReportService;
 import service.TicketService;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 import java.util.Scanner;
 
 public class TravelCompanyEShop {

@@ -4,6 +4,9 @@ import enumeration.Category;
 import enumeration.Nationality;
 import exceptions.InvalidEmailException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Customer {
     private long id;
     private String name;
@@ -11,6 +14,12 @@ public class Customer {
     private String address;
     private Nationality nationality;
     private Category category;
+
+    private double totalSpent;
+    private List<Double> purchaseHistory;
+
+
+
 
     public Customer( long id, String name, String email, String address, Nationality nationality, Category category) throws InvalidEmailException {
         this.id = id;
@@ -23,6 +32,8 @@ public class Customer {
         this.address = address;
         this.nationality = nationality;
         this.category = category;
+        this.totalSpent = 0.0;
+        this.purchaseHistory = new ArrayList<>();
 
     }
 
@@ -86,6 +97,21 @@ public class Customer {
 //        }
 //        return true;
         return !email.endsWith("@travelcompany.com");
+    }
+
+
+
+    public void addPurchase(double amount) {
+        purchaseHistory.add(amount);
+        totalSpent += amount;
+    }
+
+    public double getTotalSpent() {
+        return totalSpent;
+    }
+
+    public List<Double> getPurchaseHistory() {
+        return purchaseHistory;
     }
 
 

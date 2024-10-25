@@ -12,7 +12,6 @@ public class CustomerService {
     private List<Customer> customerList = new ArrayList<>();
 
 
-
     public CustomerService() {
 
     }
@@ -25,18 +24,6 @@ public class CustomerService {
     public void setCustomerList(List<Customer> customerList) {
         this.customerList = customerList;
     }
-
-
-//    public void deleteCustomer(long customerid) throws CustomerNotFoundException {
-//        //customerList.remove(customer);
-//        for (int i =0; i < customerList.size(); i++){
-//            if (customerList.get(i).getId()==customerid){
-//                customerList.remove(i);
-//                return;
-//            }
-//        }
-//        throw new CustomerNotFoundException("Customer id : " + customerid );
-//    }
 
 
 
@@ -64,20 +51,6 @@ public class CustomerService {
 
 
 
-
-
-//    public Customer searchCustomer(long customerid) throws CustomerNotFoundException {
-//        for (Customer customer: customerList){
-//            if (customer.getId()==customerid){
-//                return customer;
-//            }
-//        }
-//        throw new CustomerNotFoundException(customerid);
-//
-//    }
-
-
-
     public Customer searchCustomer(String email) throws CustomerNotFoundException {
         for (Customer customer: customerList){
             if (customer.getEmail().equals(email)){
@@ -98,16 +71,24 @@ public class CustomerService {
         }
 
 
+
+
+
     public void showAllCustomers() {
         if (customerList.isEmpty()) {
             System.out.println("No customers found.");
         } else {
             System.out.println("Customer list:");
             for (Customer customer : customerList) {
-                System.out.println("ID: " + customer.getId() + " , Name : " + customer.getName() + " , Email : " + customer.getEmail());
+                System.out.println("ID: " + customer.getId() +
+                        ", Name: " + customer.getName() +
+                        ", Email: " + customer.getEmail() +
+                        ", Total Spent: " + customer.getTotalSpent());
             }
         }
     }
+
+
 
 
     public String forValidEmail(Scanner scanner){
