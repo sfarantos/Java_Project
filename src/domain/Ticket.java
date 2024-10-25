@@ -15,7 +15,11 @@ public class Ticket {
         this.customer = customer;
         this.finalPrice = paymentAmount;
     }
-
+//    public Ticket( Customer customer, Itinerary itinerary, double paymentAmount) {
+//        this.itinerary = itinerary;
+//        this.customer = customer;
+//        this.finalPrice = paymentAmount;
+//    }
 
     public Itinerary getItinerary() {
         return itinerary;

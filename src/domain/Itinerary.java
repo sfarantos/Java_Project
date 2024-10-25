@@ -1,29 +1,30 @@
 package domain;
 
-import java.util.Date;
-
 public class Itinerary {
 
-    private Date departureDate;
-    private String airlineName;
-    private double price;
+
     private String departureCode;
     private String destinationCode;
+    private String departureDate;
+    private String airlineName;
+    private double price;
 
-    public Itinerary(Date departureDate, String airlineName, double price, String departureCode, String destinationCode) {
+
+    public Itinerary(String departureCode , String destinationCode , String departureDate , String airlineName , double price) {
+        this.departureCode = departureCode;
+        this.destinationCode = destinationCode;
         this.departureDate = departureDate;
         this.airlineName = airlineName;
         this.price = price;
-        this.departureCode = departureCode;
-        this.destinationCode = destinationCode;
+
     }
 
 
-    public Date getDepartureDate() {
+    public String getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(Date departureDate) {
+    public void setDepartureDate(String departureDate) {
         this.departureDate = departureDate;
     }
 

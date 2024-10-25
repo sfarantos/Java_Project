@@ -21,26 +21,6 @@ import java.util.Scanner;
 public class TravelCompanyEShop {
 
 
-
-
-//    public static void main(String[] args) {
-//
-//        long id = 0;
-//
-//        Nationality nationality = Nationality.valueOf("italian".toUpperCase());
-//        System.out.println(nationality);
-//        try {
-//            Customer businessCustomer = new Customer(id++, "Dionysis", "d.petrotos@codehub.gr", "Stadiou 2", Nationality.GREEK, Category.BUSINESS);
-//        } catch (InvalidEmailException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-
-
-
-
-
     public static void main(String[] args) {
 
         long id = 0;
@@ -64,6 +44,7 @@ public class TravelCompanyEShop {
             scanner.nextLine();
 
             switch (choice) {
+
                 case 1:
                     System.out.print("Enter customer name: ");
                     String name = scanner.nextLine();
@@ -105,53 +86,31 @@ public class TravelCompanyEShop {
 
                 case 3:
                     String customerEmail = customerService.forValidEmail(scanner);
-                    System.out.print("Enter itinerary price: ");
-                    double price = scanner.nextDouble();
-                    scanner.nextLine();
-
-                    System.out.print("Enter departure date (YYYY-MM-DD): ");
-                    String dateInput = scanner.nextLine();
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    Date departureDate;
-
-                    try {
-                        departureDate = dateFormat.parse(dateInput);
-                    } catch (ParseException e) {
-                        System.out.println("Invalid date format. Please use YYYY-MM-DD.");
-                        continue;
-                    }
-
-                    System.out.print("Enter airline name: ");
-                    String airlineName = scanner.nextLine();
-                    System.out.print("Enter itinerary departure code : ");
-                    String departureCode = scanner.nextLine();
-                    System.out.print("Enter itinerary destination code : ");
-                    String destinationCode = scanner.nextLine();
-
-                    Itinerary itinerary = new Itinerary(departureDate, airlineName, price, departureCode, destinationCode);
-
                     System.out.print("Enter payment method (1 for CREDIT_CARD , 2 for CASH) : ");
                     int paymentMethodChoice = scanner.nextInt();
                     scanner.nextLine();
 
                     PaymentMethod paymentMethod;
-                    if (paymentMethodChoice == 1){
+                    if (paymentMethodChoice == 1) {
                         paymentMethod = PaymentMethod.CREDIT_CARD;
                     } else if (paymentMethodChoice == 2) {
                         paymentMethod = PaymentMethod.CASH;
                     } else {
-                        System.out.println("Invalid payment method . Please try again ");
+                        System.out.println("Invalid payment method. Please try again.");
                         continue;
                     }
 
-
                     try {
-                        Ticket ticket = ticketService.purchaseTicket(customerEmail, itinerary, paymentMethod);
-                        System.out.println("Ticket purchased for " + ticket.getCustomer().getName() + ", Final Price: " + ticket.getFinalPrice());
+                        Ticket ticket = ticketService.purchaseTicket(customerEmail, paymentMethod, scanner);
+                        if (ticket != null) {
+                            System.out.println("Ticket purchased for " + ticket.getCustomer().getName() +
+                                    ", Final Price: " + ticket.getFinalPrice());
+                        }
                     } catch (CustomerNotFoundException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
+
 
                 case 4:
                     String deleteEmail = customerService.forValidEmail(scanner);
@@ -179,13 +138,6 @@ public class TravelCompanyEShop {
             }
         }
     }
-
-
-
-
-
-
-
 
 
 
