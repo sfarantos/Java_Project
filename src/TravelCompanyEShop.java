@@ -1,4 +1,5 @@
 import domain.Customer;
+
 import domain.Ticket;
 import enumeration.PaymentMethod;
 import exceptions.CustomerNotFoundException;
@@ -118,8 +119,6 @@ public class TravelCompanyEShop {
                     customerService.showAllCustomers();
                     break;
 
-
-
                 case 6:
                     System.out.println("Exiting the application. Goodbye!");
                     scanner.close();
@@ -139,3 +138,7 @@ public class TravelCompanyEShop {
 
 
 }
+
+
+
+

@@ -1,19 +1,19 @@
 package service;
 
 import domain.Customer;
+
 import exceptions.CustomerNotFoundException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+
+import java.util.*;
 
 public class CustomerService {
 
-    private List<Customer> customerList = new ArrayList<>();
+    private List<Customer> customerList ;
 
 
     public CustomerService() {
-
+        this.customerList = new ArrayList<Customer>();
     }
 
 
@@ -110,3 +110,6 @@ public class CustomerService {
 
 
 }
+
+
+

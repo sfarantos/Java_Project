@@ -9,6 +9,7 @@ import exceptions.CustomerNotFoundException;
 
 import java.util.Scanner;
 
+
 public class TicketService {
 
 
@@ -126,9 +127,5 @@ public class TicketService {
         double finalPrice = basePrice - (basePrice * discount);
         return finalPrice;
     }
-
-
-
-
-
 }
+
