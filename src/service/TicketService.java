@@ -43,7 +43,7 @@ public class TicketService {
 
         Itinerary selectedItinerary = null;
         if (choice == 1) {
-            System.out.print("Available Itineraries:");
+            System.out.println("Available Itineraries:");
             for (int i = 0; i < itineraries.length; i++) {
                 Itinerary itinerary = itineraries[i];
                 System.out.println((i + 1) + ". Departure: " + itinerary.getDepartureCode() +
@@ -127,5 +127,26 @@ public class TicketService {
         double finalPrice = basePrice - (basePrice * discount);
         return finalPrice;
     }
+
+
+
+
+    public void displayAllItineraries() {
+        System.out.println("Available Itineraries:");
+        for (Itinerary itinerary : itineraries) {
+            System.out.println("Departure: " + itinerary.getDepartureCode() +
+                    ", Destination: " + itinerary.getDestinationCode() +
+                    ", Date: " + itinerary.getDepartureDate() +
+                    ", Airline: " + itinerary.getAirlineName() +
+                    ", Price: $" + itinerary.getPrice());
+        }
+    }
+
+
+
+
+
+
+
 }
 

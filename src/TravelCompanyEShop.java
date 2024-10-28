@@ -7,6 +7,7 @@ import exceptions.InvalidEmailException;
 import enumeration.Category;
 import enumeration.Nationality;
 import service.CustomerService;
+import service.Reporting;
 import service.TicketService;
 
 import java.util.Scanner;
@@ -20,6 +21,8 @@ public class TravelCompanyEShop {
 
         CustomerService customerService = new CustomerService();
         TicketService ticketService = new TicketService(customerService);
+        Reporting reportingService = new Reporting(customerService, ticketService);
+
 
         Scanner scanner = new Scanner(System.in);
 
@@ -30,7 +33,9 @@ public class TravelCompanyEShop {
             System.out.println("3. Purchase ticket");
             System.out.println("4. Delete customer by email");
             System.out.println("5. Show all customers");
-            System.out.println("6. Exit");
+//            System.out.println("6. Exit");
+            System.out.println("6. Reports");
+            System.out.println("7. Exit");
             System.out.print("Choose an option: ");
 
             int choice = scanner.nextInt();
@@ -119,10 +124,45 @@ public class TravelCompanyEShop {
                     customerService.showAllCustomers();
                     break;
 
+
                 case 6:
+                    System.out.println("\n=== Reports Menu ===");
+                    System.out.println("1. Total amount spent by all customers");
+                    System.out.println("2. List of all itineraries");
+                    System.out.println("3. List of all purchases");
+                    System.out.println("4. Customers with no purchases");
+                    System.out.print("Choose a report: ");
+                    int reportChoice = scanner.nextInt();
+                    scanner.nextLine();
+
+                    switch (reportChoice) {
+                        case 1:
+                            reportingService.showTotalAmountSpent();
+                            break;
+                        case 2:
+                            reportingService.showAllItineraries();
+                            break;
+                        case 3:
+                            reportingService.showAllPurchases();
+                            break;
+                        case 4:
+                            reportingService.showCustomersWithoutPurchases();
+                            break;
+                        default:
+                            System.out.println("Invalid report option. Please try again.");
+                    }
+                    break;
+
+                case 7:
                     System.out.println("Exiting the application. Goodbye!");
                     scanner.close();
                     return;
+
+
+//                case 6:
+//                    System.out.println("Exiting the application. Goodbye!");
+//                    scanner.close();
+//                    return;
 
                 default:
                     System.out.println("Invalid option. Please try again.");
