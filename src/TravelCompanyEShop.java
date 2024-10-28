@@ -33,7 +33,6 @@ public class TravelCompanyEShop {
             System.out.println("3. Purchase ticket");
             System.out.println("4. Delete customer by email");
             System.out.println("5. Show all customers");
-//            System.out.println("6. Exit");
             System.out.println("6. Reports");
             System.out.println("7. Exit");
             System.out.print("Choose an option: ");
@@ -158,11 +157,6 @@ public class TravelCompanyEShop {
                     scanner.close();
                     return;
 
-
-//                case 6:
-//                    System.out.println("Exiting the application. Goodbye!");
-//                    scanner.close();
-//                    return;
 
                 default:
                     System.out.println("Invalid option. Please try again.");
