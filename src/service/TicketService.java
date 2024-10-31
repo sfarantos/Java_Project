@@ -133,12 +133,13 @@ public class TicketService {
 
     public void displayAllItineraries() {
         System.out.println("Available Itineraries:");
-        for (Itinerary itinerary : itineraries) {
+        for (int i = 0; i < itineraries.length; i++) {
+            Itinerary itinerary = itineraries[i];
             System.out.println("Departure: " + itinerary.getDepartureCode() +
                     ", Destination: " + itinerary.getDestinationCode() +
                     ", Date: " + itinerary.getDepartureDate() +
                     ", Airline: " + itinerary.getAirlineName() +
-                    ", Price: $" + itinerary.getPrice());
+                    ", Price: " + itinerary.getPrice());
         }
     }
 

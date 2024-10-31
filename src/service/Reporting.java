@@ -1,6 +1,8 @@
 package service;
 
 import domain.Customer;
+import domain.Ticket;
+
 import java.util.List;
 
 public class Reporting {
@@ -18,7 +20,8 @@ public class Reporting {
         int totalTickets = 0;
         List<Customer> customers = customerService.getCustomerList();
 
-        for (Customer customer : customers) {
+        for (int i = 0; i < customers.size(); i++) {
+            Customer customer = customers.get(i);
             totalAmount += customer.getTotalSpent();
             totalTickets += customer.getPurchaseHistory().size();
         }
@@ -39,12 +42,14 @@ public class Reporting {
         List<Customer> customers = customerService.getCustomerList();
         boolean hasPurchases = false;
 
-        for (Customer customer : customers) {
+        for (int i = 0; i < customers.size(); i++) {
+            Customer customer = customers.get(i);
             List<Double> purchases = customer.getPurchaseHistory();
-            for (double purchase : purchases) {
+            for (int j = 0; j < purchases.size(); j++) {
+                double purchase = purchases.get(j);
                 System.out.println("Customer Name: " + customer.getName() +
                         ", Email: " + customer.getEmail() +
-                        ", Purchase Amount: $" + purchase);
+                        ", Purchase Amount: " + purchase);
                 hasPurchases = true;
             }
         }
@@ -58,10 +63,10 @@ public class Reporting {
         List<Customer> customers = customerService.getCustomerList();
         boolean hasCustomersWithoutPurchases = false;
 
-        for (Customer customer : customers) {
+        for (int i = 0; i < customers.size(); i++) {
+            Customer customer = customers.get(i);
             if (customer.getTotalSpent() == 0.0) {
-                System.out.println("Customer Name: " + customer.getName() +
-                        ", Email: " + customer.getEmail());
+                System.out.println("Customer Name: " + customer.getName() + ", Email: " + customer.getEmail());
                 hasCustomersWithoutPurchases = true;
             }
         }
@@ -70,6 +75,7 @@ public class Reporting {
             System.out.println("No customers without purchases.");
         }
     }
+
 
 
 

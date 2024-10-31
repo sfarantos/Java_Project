@@ -6,6 +6,7 @@ import exceptions.CustomerNotFoundException;
 
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class CustomerService {
 
@@ -91,20 +92,37 @@ public class CustomerService {
 
 
 
-    public String forValidEmail(Scanner scanner){
+//    public String forValidEmail(Scanner scanner){
+//        String email;
+//        while (true){
+//            System.out.print("Enter customer email: ");
+//            email = scanner.nextLine();
+//            if (email.contains("@")){
+//                break;
+//            } else {
+//                System.out.println("Invalid email. Pleasa enter again the email ");
+//            }
+//        }
+//        return email;
+//    }
+
+
+    public String forValidEmail(Scanner scanner) {
         String email;
-        while (true){
+        Pattern emailPattern = Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
+
+        while (true) {
             System.out.print("Enter customer email: ");
             email = scanner.nextLine();
-            if (email.contains("@")){
+
+            if (emailPattern.matcher(email).matches()) {
                 break;
             } else {
-                System.out.println("Invalid email. Pleasa enter again the email ");
+                System.out.println("Invalid email. Please enter again the email ");
             }
         }
         return email;
     }
-
 
 
 
